@@ -45,8 +45,7 @@ CharacterManager/
 
 Screenshot berikut memperlihatkan hasil eksekusi program Character Manager, termasuk daftar tiga karakter, demo level up, nilai mana, hasil pemeriksaan `isAlive()`, dan validasi mana negatif.
 
-![Output Character Manager](<img width="473" height="173" alt="output_tp3" src="https://github.com/user-attachments/assets/4898a220-7493-4317-a760-815591c7f993" />
-)
+![Output Character Manager](output_tp3.png)
 
 ## Identitas Mahasiswa
 
