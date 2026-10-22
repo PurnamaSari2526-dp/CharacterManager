@@ -339,7 +339,7 @@ Tugas ini juga membantu memahami penggunaan `JFrame`, `JPanel`, `JLabel`, event-
 
 **Judul dokumen:** `JavaVisual_TP08_[purnama sari]_[253303621208]`
 
-**Link Google Docs:** [Tempelkan link Google Docs kamu di sini]
+**Link Google Docs:** [https://1drv.ms/w/c/EF681E4F4E3CE288/IQCVjYgbhaBeRrGWPrY4-RD8ASXF7lKziWi85TCA0ig1Hl8?e=KYHsi7]
 
 Dokumen tersebut berisi analisis mengenai program sekuensial dan event-driven, penggunaan `SwingUtilities.invokeLater()`, perbaikan kode `JFrame`, relasi *is-a* dan *has-a*, serta pembagian tanggung jawab dalam MVC.
 
