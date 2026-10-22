@@ -325,7 +325,7 @@ Screenshot pertama menunjukkan lima karakter awal dan rata-rata level sebesar 5.
 
 Screenshot kedua menunjukkan daftar karakter setelah Naruto ditambahkan dan rata-rata level berubah menjadi 6.14.
 
-![Screenshot sesudah data diubah](tp8-sesudah.png)
+![Screenshot sesudah data diubah](tp8_sesudah.png)
 
 **Catatan:** Simpan screenshot asli dari aplikasi pada folder `screenshots` menggunakan nama file yang tercantum di atas. Pastikan kedua screenshot menunjukkan hasil program yang sebenarnya.
 
