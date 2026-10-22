@@ -205,3 +205,141 @@ Tugas ini juga membantu memahami konsep referensi objek, kesetaraan objek menggu
 
 **Link Google Docs:** [https://1drv.ms/w/c/EF681E4F4E3CE288/IQA4FnerNc4XQYRnqw-o7hjPAQjro83O_OJ4Mw9Ll9GR_IA?e=yHa8Ab]
 
+
+
+---------------------------
+
+# Character Manager
+
+## TP8 — MainWindow, Data Dinamis & Analisis MVC
+
+### Identitas Mahasiswa
+
+* **Nama:** [purnama sari]
+* **NIM:** [253303621208]
+* **Mata Kuliah:** Pemrograman Java Visual
+* **Tugas:** TP8 AP10 — Character Manager Sprint #3
+
+---
+
+## 1. Deskripsi Proyek
+
+Character Manager merupakan aplikasi berbasis Java untuk mengelola data karakter game. Pada TP8, aplikasi dikembangkan dari program berbasis console menjadi aplikasi GUI (*Graphical User Interface*) menggunakan Java Swing.
+
+Aplikasi dapat menampilkan daftar karakter secara dinamis, menambahkan karakter baru melalui formulir, dan menghitung rata-rata level karakter secara otomatis. Pengembangan ini juga menerapkan konsep dasar MVC (*Model-View-Controller*) dengan memisahkan pengelolaan data dari tampilan aplikasi.
+
+## 2. Struktur Folder
+
+```text
+CharacterManager/
+├── src/
+│   └── com/
+│       └── unpri/
+│           └── charactermanager/
+│               ├── Main.java
+│               ├── CharacterManager.java
+│               ├── model/
+│               │   ├── Character.java
+│               │   └── CharacterType.java
+│               └── view/
+│                   └── MainWindow.java
+├── screenshots/
+│   ├── tp8-sebelum.png
+│   └── tp8-sesudah.png
+└── README.md
+```
+
+## 3. Fitur Aplikasi
+
+Aplikasi Character Manager memiliki fitur berikut:
+
+1. Menampilkan jendela utama menggunakan `JFrame`.
+2. Menampilkan daftar karakter secara dinamis menggunakan perulangan.
+3. Menampilkan nama, tipe, dan level setiap karakter.
+4. Menambahkan karakter baru melalui tombol **Tambah Karakter**.
+5. Memilih tipe karakter, seperti `WARRIOR`, `MAGE`, dan `ARCHER`.
+6. Menentukan level karakter melalui formulir.
+7. Menolak penambahan karakter dengan nama yang sudah terdaftar.
+8. Menghitung dan menampilkan rata-rata level karakter secara otomatis.
+9. Menjalankan GUI melalui `SwingUtilities.invokeLater()`.
+
+## 4. Data Karakter
+
+Pada TP8, aplikasi Character Manager menampilkan lima karakter awal, yaitu Arthas, Merlin, Legolas, Gandalf, dan Thor. Selain itu, saya menambahkan dua karakter baru melalui fitur Tambah Karakter pada aplikasi GUI.
+
+Karakter tambahan tersebut adalah:
+
+No.	Nama Karakter	Tipe	Level	Alasan Pemilihan
+1	Purnama	WARRIOR	8	Dipilih sebagai karakter petarung dengan level yang cukup tinggi.
+2	Dapa	MAGE	10	Dipilih sebagai karakter penyihir dengan level tertinggi di antara karakter tambahan.
+
+Purnama dipilih sebagai karakter bertipe WARRIOR karena menggambarkan karakter yang mengandalkan kemampuan bertarung. Dapa dipilih sebagai karakter bertipe MAGE karena menggambarkan karakter yang memiliki kemampuan sihir. Kedua karakter ini digunakan untuk menguji fitur penambahan karakter melalui GUI dan memastikan data baru dapat ditampilkan secara dinamis.
+
+## 5. Perhitungan Rata-Rata Level
+
+Aplikasi Character Manager menghitung rata-rata level berdasarkan jumlah level seluruh karakter dibagi dengan jumlah karakter yang tersimpan.
+
+Lima karakter awal memiliki level berikut:
+
+Arthas: level 3
+Merlin: level 5
+Legolas: level 2
+Gandalf: level 8
+Thor: level 7
+
+Rata-rata sebelum penambahan karakter:
+
+(3 + 5 + 2 + 8 + 7) / 5 = 5.00
+
+Setelah Purnama dan Dapa ditambahkan, data level menjadi:
+
+Arthas: level 3
+Merlin: level 5
+Legolas: level 2
+Gandalf: level 8
+Thor: level 7
+Purnama: level 8
+Dapa: level 10
+
+Rata-rata setelah penambahan karakter:
+
+(3 + 5 + 2 + 8 + 7 + 8 + 10) / 7 = 6.14
+
+Dengan demikian, rata-rata level meningkat dari 5.00 menjadi 6.14. Perubahan ini menunjukkan bahwa statistik aplikasi mengikuti jumlah dan level karakter yang tersimpan di dalam CharacterManager.
+
+## 6. Aliran Data dan Konsep MVC
+
+Pada aplikasi ini, `Main.java` membuat objek karakter dan memasukkannya ke dalam `CharacterManager`. Selanjutnya, `Main.java` membuat `MainWindow` dengan memberikan objek `CharacterManager` melalui constructor. `MainWindow` mengambil daftar karakter menggunakan `getAllCharacters()` dan menghitung statistik melalui `getAverageLevel()`. Ketika pengguna menambahkan karakter melalui formulir, `MainWindow` meminta `CharacterManager` menyimpan data tersebut, kemudian memperbarui daftar dan statistik.
+
+Penerapan ini mulai memisahkan pengelolaan data dari tampilan. `CharacterManager` berperan dalam pengelolaan data, sedangkan `MainWindow` berperan sebagai View. Controller khusus belum dipisahkan menjadi class tersendiri, sehingga alur interaksi masih ditangani oleh event handler pada View.
+
+## 7. Screenshot Hasil Program
+
+### Sebelum Data Diubah
+
+Screenshot pertama menunjukkan lima karakter awal dan rata-rata level sebesar 5.00.
+
+![Screenshot sebelum data diubah](tp8-sebelum.png)
+
+### Sesudah Data Diubah
+
+Screenshot kedua menunjukkan daftar karakter setelah Naruto ditambahkan dan rata-rata level berubah menjadi 6.14.
+
+![Screenshot sesudah data diubah](tp8-sesudah.png)
+
+**Catatan:** Simpan screenshot asli dari aplikasi pada folder `screenshots` menggunakan nama file yang tercantum di atas. Pastikan kedua screenshot menunjukkan hasil program yang sebenarnya.
+
+## 8. Kesimpulan
+
+Melalui TP8, aplikasi Character Manager dikembangkan menggunakan Java Swing agar dapat menampilkan data karakter melalui GUI. Daftar karakter ditampilkan secara dinamis, pengguna dapat menambahkan karakter melalui formulir, dan statistik rata-rata level diperbarui setelah data berubah.
+
+Tugas ini juga membantu memahami penggunaan `JFrame`, `JPanel`, `JLabel`, event-driven programming, `SwingUtilities.invokeLater()`, dan konsep dasar MVC.
+
+## 9. Dokumentasi Analisis Google Docs
+
+**Judul dokumen:** `JavaVisual_TP08_[purnama sari]_[253303621208]`
+
+**Link Google Docs:** [Tempelkan link Google Docs kamu di sini]
+
+Dokumen tersebut berisi analisis mengenai program sekuensial dan event-driven, penggunaan `SwingUtilities.invokeLater()`, perbaikan kode `JFrame`, relasi *is-a* dan *has-a*, serta pembagian tanggung jawab dalam MVC.
+
