@@ -1,4 +1,3 @@
-<img width="473" height="173" alt="output_tp3" src="https://github.com/user-attachments/assets/7c9c6694-c223-48e8-8747-00022c5f3a93" />
 # Character Manager — TP3 (Java Visual SIH-6406)
 
 ## Deskripsi
@@ -46,7 +45,8 @@ CharacterManager/
 
 Screenshot berikut memperlihatkan hasil eksekusi program Character Manager, termasuk daftar tiga karakter, demo level up, nilai mana, hasil pemeriksaan `isAlive()`, dan validasi mana negatif.
 
-![Output Character Manager](output_tp3/output.png)
+![Output Character Manager](<img width="473" height="173" alt="output_tp3" src="https://github.com/user-attachments/assets/4898a220-7493-4317-a760-815591c7f993" />
+)
 
 ## Identitas Mahasiswa
 
