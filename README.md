@@ -319,7 +319,7 @@ Penerapan ini mulai memisahkan pengelolaan data dari tampilan. `CharacterManager
 
 Screenshot pertama menunjukkan lima karakter awal dan rata-rata level sebesar 5.00.
 
-![Screenshot sebelum data diubah](tp8-sebelum.png)
+![Screenshot sebelum data diubah](tp8_sebelum.png)
 
 ### Sesudah Data Diubah
 
