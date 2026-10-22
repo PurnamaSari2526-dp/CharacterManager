@@ -1,3 +1,4 @@
+<img width="473" height="173" alt="output_tp3" src="https://github.com/user-attachments/assets/7c9c6694-c223-48e8-8747-00022c5f3a93" />
 # Character Manager — TP3 (Java Visual SIH-6406)
 
 ## Deskripsi
