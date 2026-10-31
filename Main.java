@@ -1,51 +1,79 @@
 package com.unpri.charactermanager;
 
 import com.unpri.charactermanager.model.Character;
+import com.unpri.charactermanager.model.CharacterManager;
 import com.unpri.charactermanager.model.CharacterType;
 import com.unpri.charactermanager.view.MainWindow;
 import javax.swing.SwingUtilities;
 
 public class Main {
 
-public static void main(String[] args) {
+    public static void main(String[] args) {
 
-    CharacterManager manager = new CharacterManager();
+        CharacterManager manager =
+                new CharacterManager();
 
-    Character arthas = new Character(
-            "Arthas", CharacterType.WARRIOR
-    );
-    arthas.setLevel(3);
+        // Karakter 1
+        Character bima = new Character(
+                "Bima",
+                CharacterType.WARRIOR,
+                10,
+                20
+        );
 
-    Character merlin = new Character(
-            "Merlin", CharacterType.MAGE
-    );
-    merlin.setLevel(5);
+        // Karakter 2
+        Character maya = new Character(
+                "Maya",
+                CharacterType.MAGE,
+                3,
+                50
+        );
 
-    Character legolas = new Character(
-            "Legolas", CharacterType.ARCHER
-    );
-    legolas.setLevel(2);
+        // Karakter 3
+        Character raka = new Character(
+                "Raka",
+                CharacterType.ARCHER,
+                7,
+                15
+        );
 
-    // Dua karakter baru untuk TP8
-    Character gandalf = new Character(
-            "Gandalf", CharacterType.MAGE
-    );
-    gandalf.setLevel(8);
+        // Karakter 4
+        Character sinta = new Character(
+                "Sinta",
+                CharacterType.MAGE,
+                4,
+                40
+        );
 
-    Character thor = new Character(
-            "Thor", CharacterType.WARRIOR
-    );
-    thor.setLevel(7);
+        // Karakter 5
+        Character damar = new Character(
+                "Damar",
+                CharacterType.WARRIOR,
+                6,
+                25
+        );
 
-    manager.addCharacter(arthas);
-    manager.addCharacter(merlin);
-    manager.addCharacter(legolas);
-    manager.addCharacter(gandalf);
-    manager.addCharacter(thor);
+        // Karakter 6
+        Character kirana = new Character(
+                "Kirana",
+                CharacterType.ASSASSIN,
+                8,
+                60
+        );
 
-    SwingUtilities.invokeLater(() -> {
-        new MainWindow(manager);
-    });
-}
+        // Menambahkan karakter
+        manager.addCharacter(bima);
+        manager.addCharacter(maya);
+        manager.addCharacter(raka);
+        manager.addCharacter(sinta);
+        manager.addCharacter(damar);
+        manager.addCharacter(kirana);
 
+        // Menjalankan aplikasi GUI
+        SwingUtilities.invokeLater(() -> {
+
+            new MainWindow(manager);
+
+        });
+    }
 }
