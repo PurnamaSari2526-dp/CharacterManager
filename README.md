@@ -343,3 +343,297 @@ Tugas ini juga membantu memahami penggunaan `JFrame`, `JPanel`, `JLabel`, event-
 
 Dokumen tersebut berisi analisis mengenai program sekuensial dan event-driven, penggunaan `SwingUtilities.invokeLater()`, perbaikan kode `JFrame`, relasi *is-a* dan *has-a*, serta pembagian tanggung jawab dalam MVC.
 
+----------------------
+**#TP 10#**
+# CHARACTER MANAGER SPRINT #4
+
+## Theming, Properti Komponen & Analisis MVC
+
+### Identitas Mahasiswa
+
+| Keterangan  | Informasi                   |
+| ----------- | --------------------------- |
+| Nama        | Purnama Sari                |
+| NIM         | 253303621208                |
+| Kelas       | Pagi A                      |
+| Mata Kuliah | Java Visual                 |
+| Tugas       | TP10 / AP13                 |
+| Sprint      | Character Manager Sprint #4 |
+
+---
+
+## 1. Deskripsi Proyek
+
+Character Manager merupakan aplikasi berbasis Java Swing yang digunakan untuk mengelola dan menampilkan data karakter. Aplikasi ini dikembangkan secara bertahap mulai dari Sprint #1 hingga Sprint #4.
+
+Pada Sprint #4, aplikasi dikembangkan dengan menambahkan pengaturan tema tampilan menggunakan class `AppTheme.java`. Pengaturan tersebut meliputi warna, jenis font, border, dan warna khusus berdasarkan tipe karakter.
+
+Selain itu, aplikasi juga menerapkan beberapa properti komponen Swing agar tampilan lebih menarik, mudah dibaca, dan nyaman digunakan.
+
+Pengembangan ini tetap mempertahankan struktur Model dari Sprint #3 agar fungsi pengelolaan data karakter tidak berubah.
+
+## 2. Tujuan Pengembangan
+
+Tujuan dari pengembangan Character Manager Sprint #4 adalah:
+
+1. Menerapkan pengaturan tema aplikasi menggunakan `AppTheme.java`.
+2. Menggunakan warna yang berbeda berdasarkan tipe karakter.
+3. Mengatur font dan border agar tampilan lebih konsisten.
+4. Menerapkan properti komponen pada Java Swing.
+5. Menampilkan data karakter secara dinamis menggunakan perulangan.
+6. Menerapkan konsep MVC dalam pengembangan aplikasi.
+7. Mempertahankan bagian Model dari Sprint #3 tanpa perubahan.
+
+## 3. Fitur Aplikasi
+
+Fitur yang terdapat pada Character Manager Sprint #4:
+
+* Menampilkan daftar karakter.
+* Menampilkan nama dan tipe karakter.
+* Menampilkan level, HP, dan ATK setiap karakter.
+* Menggunakan warna kartu sesuai tipe karakter.
+* Menampilkan karakter dengan level 5 atau lebih menggunakan tulisan berwarna emas dan tebal.
+* Menampilkan informasi tambahan melalui tooltip.
+* Menggunakan tampilan yang konsisten melalui AppTheme.
+* Menampilkan data karakter secara dinamis menggunakan perulangan `for`.
+
+## 4. Jenis Karakter
+
+Aplikasi memiliki empat jenis karakter, yaitu:
+
+| Tipe Karakter | Warna Tampilan | Keterangan                                                  |
+| ------------- | -------------- | ----------------------------------------------------------- |
+| WARRIOR       | Merah          | Karakter petarung jarak dekat dengan HP tinggi.             |
+| MAGE          | Biru           | Karakter yang menggunakan serangan sihir.                   |
+| ARCHER        | Hijau          | Karakter yang menyerang dari jarak jauh.                    |
+| ASSASSIN      | Abu-abu        | Karakter dengan tipe khusus yang menggunakan warna default. |
+
+Warna karakter diatur melalui method `colorFor()` pada class `AppTheme.java`.
+
+## 5. Data Karakter
+
+Aplikasi menampilkan enam karakter dengan tipe dan level yang berbeda.
+
+| No. | Nama   | Tipe     | Level | Mana |
+| --- | ------ | -------- | ----- | ---- |
+| 1   | Bima   | WARRIOR  | 10    | 20   |
+| 2   | Maya   | MAGE     | 3     | 50   |
+| 3   | Raka   | ARCHER   | 7     | 15   |
+| 4   | Sinta  | MAGE     | 4     | 40   |
+| 5   | Damar  | WARRIOR  | 6     | 25   |
+| 6   | Kirana | ASSASSIN | 8     | 60   |
+
+Karakter dengan level 5 atau lebih ditampilkan menggunakan tulisan berwarna emas dan tebal. Dengan demikian, pengguna dapat membedakan karakter berdasarkan levelnya.
+
+## 6. Struktur Folder Proyek
+
+Struktur folder proyek Character Manager adalah sebagai berikut:
+
+CharacterManager/
+│
+├── src/
+│   └── com/
+│       └── unpri/
+│           └── charactermanager/
+│               │
+│               ├── Main.java
+│               │
+│               ├── model/
+│               │   ├── Character.java
+│               │   ├── CharacterManager.java
+│               │   └── CharacterType.java
+│               │
+│               └── view/
+│                   ├── AppTheme.java
+│                   └── MainWindow.java
+│
+├── Screenshot/
+│   ├── output_tp8.png
+│   └── output_tp10.png
+│
+└── README.md
+
+### Penjelasan File
+
+**1. Main.java**
+
+Merupakan file utama untuk menjalankan aplikasi. File ini membuat objek karakter, memasukkan karakter ke dalam CharacterManager, dan membuka tampilan MainWindow menggunakan `SwingUtilities.invokeLater()`.
+
+**2. Character.java**
+
+Merupakan class Model yang menyimpan data karakter, seperti nama, tipe, level, HP, attack, dan mana.
+
+**3. CharacterManager.java**
+
+Digunakan untuk mengelola kumpulan karakter, seperti menambahkan karakter, mencari karakter, menghapus karakter, dan menghitung jumlah karakter.
+
+**4. CharacterType.java**
+
+Merupakan enum yang berisi empat tipe karakter, yaitu WARRIOR, MAGE, ARCHER, dan ASSASSIN.
+
+**5. AppTheme.java**
+
+Merupakan pusat pengaturan tema aplikasi yang berisi warna, font, border, serta pengaturan warna berdasarkan tipe karakter.
+
+**6. MainWindow.java**
+
+Merupakan bagian tampilan aplikasi yang menggunakan Java Swing. File ini menampilkan daftar karakter secara dinamis dan menerapkan pengaturan tema dari AppTheme.
+
+## 7. Implementasi AppTheme
+
+Pada Sprint #4 dibuat class `AppTheme.java` sebagai pusat pengaturan tampilan aplikasi.
+
+Pengaturan yang diterapkan meliputi:
+
+### A. Pengaturan Warna
+
+AppTheme memiliki beberapa warna, seperti:
+
+* `BG_MAIN` untuk warna latar belakang utama.
+* `TEXT_MAIN` untuk warna teks utama.
+* `TEXT_LIGHT` untuk warna teks terang.
+* `GOLD` untuk teks karakter dengan level tinggi.
+
+Selain itu, terdapat method `colorFor()` untuk menentukan warna kartu berdasarkan tipe karakter.
+
+### B. Pengaturan Font
+
+AppTheme menyediakan tiga jenis font:
+
+* `FONT_TITLE` untuk judul aplikasi.
+* `FONT_BODY` untuk teks informasi karakter.
+* `FONT_MONO` untuk teks dengan jenis font Monospaced.
+
+### C. Pengaturan Border
+
+`CARD_BORDER` digunakan untuk memberikan jarak di dalam kartu karakter agar informasi tidak terlalu dekat dengan tepi komponen.
+
+Dengan adanya AppTheme, pengaturan tampilan aplikasi menjadi lebih terpusat dan mudah diubah.
+
+## 8. Properti Tambahan Komponen Swing
+
+Pada pengembangan Sprint #4, terdapat beberapa properti tambahan yang diterapkan pada komponen Swing.
+
+### A. ToolTipText
+
+Properti `setToolTipText()` digunakan untuk menampilkan informasi tambahan ketika pengguna mengarahkan kursor ke kartu karakter.
+
+Informasi yang ditampilkan berupa deskripsi tipe karakter serta informasi HP dan ATK.
+
+**Alasan penggunaan:** Membantu pengguna mendapatkan informasi tambahan tanpa membuat tampilan utama terlalu penuh.
+
+### B. Cursor
+
+Properti `setCursor()` digunakan untuk mengubah bentuk kursor ketika diarahkan ke kartu karakter.
+
+Kursor menggunakan bentuk `HAND_CURSOR`.
+
+**Alasan penggunaan:** Memberikan petunjuk visual bahwa komponen dapat diarahkan atau berinteraksi dengan pengguna.
+
+### C. Opaque
+
+Properti `setOpaque(true)` diterapkan pada JLabel kartu karakter agar warna background dapat ditampilkan dengan benar.
+
+**Alasan penggunaan:** Memastikan warna kartu karakter terlihat sesuai dengan warna yang ditentukan di AppTheme.
+
+## 9. Penerapan Level Tinggi
+
+Aplikasi menerapkan ketentuan bahwa karakter dengan level minimal 5 akan mendapatkan tampilan khusus.
+
+Pengaturan tersebut menggunakan konstanta `HIGH_LEVEL_THRESHOLD` dengan nilai 5.
+
+Karakter yang memenuhi ketentuan akan memiliki:
+
+* Warna teks emas.
+* Font tebal atau bold.
+
+Penggunaan konstanta bertujuan agar batas level mudah diubah tanpa harus mengedit banyak bagian kode.
+
+## 10. Analisis MVC
+
+Pengembangan Character Manager menggunakan konsep MVC (Model-View-Controller).
+
+### A. Model
+
+Model merupakan bagian yang bertanggung jawab mengelola data dan logika aplikasi.
+
+File yang termasuk bagian Model:
+
+* Character.java
+* CharacterManager.java
+* CharacterType.java
+
+### B. View
+
+View merupakan bagian yang bertanggung jawab menampilkan informasi kepada pengguna.
+
+File yang termasuk bagian View:
+
+* MainWindow.java
+* AppTheme.java
+
+MainWindow menampilkan daftar karakter, sedangkan AppTheme mengatur warna, font, dan tampilan komponen.
+
+### C. Controller
+
+Pada implementasi ini, alur awal aplikasi diatur melalui Main.java. File tersebut membuat data karakter, memasukkannya ke CharacterManager, kemudian meneruskan data ke MainWindow untuk ditampilkan.
+
+Dengan pemisahan tanggung jawab tersebut, pengelolaan data dan tampilan aplikasi menjadi lebih terstruktur.
+
+## 11. Screenshot Hasil Aplikasi
+
+### A. Tampilan Sebelum Pengembangan (TP8 / v0.3)
+
+Screenshot berikut menunjukkan tampilan aplikasi sebelum penerapan tema Sprint #4.
+
+![Tampilan Sebelum TP8](tp8_sebelum.png)
+
+### B. Tampilan Setelah Pengembangan (TP10 / v0.4)
+
+Screenshot berikut menunjukkan tampilan aplikasi setelah penerapan AppTheme, warna kartu berdasarkan tipe karakter, font, dan properti tambahan komponen Swing.
+
+![Tampilan Setelah TP10](tp10_sesudah.png)
+
+## 12. Alasan Penggunaan AppTheme
+
+Pengaturan warna dan font diletakkan di dalam AppTheme, bukan di dalam Character.java, karena Character.java merupakan bagian Model yang bertugas menyimpan dan mengelola data karakter.
+
+Jika pengaturan tampilan dimasukkan ke dalam Model, maka tanggung jawab antara data dan tampilan akan tercampur. Hal ini dapat membuat kode sulit dipelihara dan menyulitkan perubahan tampilan aplikasi.
+
+Dengan menggunakan AppTheme, pengaturan warna, font, dan border menjadi lebih terpusat sehingga lebih mudah dikelola.
+
+## 13. Cara Menjalankan Aplikasi
+
+Langkah menjalankan aplikasi:
+
+1. Buka folder CharacterManager menggunakan Visual Studio Code.
+2. Pastikan seluruh file Java berada pada package yang sesuai.
+3. Pastikan Java Development Kit (JDK) sudah terpasang.
+4. Buka file `Main.java`.
+5. Jalankan program menggunakan tombol Run Java.
+6. Aplikasi Character Manager akan menampilkan daftar enam karakter.
+
+## 14. Link Google Docs Analisis MVC
+
+Dokumen analisis MVC dan properti komponen Swing dibuat secara terpisah menggunakan Google Docs.
+
+**Link Google Docs:**
+(https://1drv.ms/w/c/EF681E4F4E3CE288/IQAcJDuXdPxjT77TTgSWo8igAe5r36mWLeHtZBQ6tiCMnIs?e=RXezku)
+
+Dokumen tersebut membahas:
+
+1. Getter dan setter pada komponen Swing.
+2. Penggunaan setForeground dan setBackground.
+3. Perbedaan setSize, setPreferredSize, dan pack.
+4. Alasan pengaturan warna berada di AppTheme.
+5. Logical Font dan penggunaan deriveFont.
+
+## 15. Kesimpulan
+
+Berdasarkan pengembangan Character Manager Sprint #4, aplikasi telah menerapkan pengaturan tema menggunakan AppTheme, pengaturan warna berdasarkan tipe karakter, penggunaan font, border, dan properti tambahan komponen Swing.
+
+Aplikasi juga menampilkan data enam karakter secara dinamis dan memberikan tampilan khusus untuk karakter dengan level minimal 5.
+
+Melalui pengembangan ini, pemahaman mengenai Java Swing, properti komponen, pengaturan tampilan, dan konsep MVC menjadi lebih baik. Struktur Model dari Sprint #3 tetap dipertahankan sehingga pengembangan Sprint #4 dapat melanjutkan pekerjaan sebelumnya.
+
+
