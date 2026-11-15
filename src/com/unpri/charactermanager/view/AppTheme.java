@@ -9,7 +9,7 @@ import javax.swing.border.Border;
 
 public class AppTheme {
 
-    // ================= WARNA =================
+    // ================= WARNA APLIKASI =================
 
     public static final Color BG_MAIN =
             Color.decode("#13131f");
@@ -30,7 +30,7 @@ public class AppTheme {
             Color.decode("#444466");
 
 
-    // ================= FONT =================
+    // ================= FONT APLIKASI =================
 
     public static final Font FONT_TITLE =
             new Font("SansSerif", Font.BOLD, 22);
@@ -63,6 +63,7 @@ public class AppTheme {
         }
 
         switch (type) {
+
             case WARRIOR:
                 return new Color(120, 50, 50);
 
@@ -72,7 +73,7 @@ public class AppTheme {
             case ARCHER:
                 return new Color(45, 110, 75);
 
-            case ASSASSIN:
+            case HEALER:
                 return new Color(100, 65, 110);
 
             default:

@@ -10,7 +10,10 @@ import java.util.ArrayList;
 
 public class MainWindow extends JFrame {
 
-    private CharacterManager manager;
+    // Batas level untuk highlight
+    private static final int LEVEL_HIGHLIGHT = 5;
+
+    private final CharacterManager manager;
 
     private JPanel listPanel;
     private JLabel statisticLabel;
@@ -18,33 +21,36 @@ public class MainWindow extends JFrame {
     private JTextField nameField;
     private JTextField levelField;
     private JTextField manaField;
+
     private JComboBox<CharacterType> typeComboBox;
 
     public MainWindow(CharacterManager manager) {
 
         this.manager = manager;
 
-        setTitle("Character Manager - TP8");
+        setTitle("Character Manager v0.4");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        getContentPane().setBackground(AppTheme.BG_MAIN);
         setLayout(new BorderLayout(15, 15));
 
-        // JUDUL
+        // ================= JUDUL =================
+
         JLabel titleLabel = new JLabel(
-            "CHARACTER MANAGER",
-            SwingConstants.CENTER
+                "CHARACTER MANAGER",
+                SwingConstants.CENTER
         );
 
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        titleLabel.setFont(AppTheme.FONT_TITLE);
+        titleLabel.setForeground(AppTheme.GOLD);
+        titleLabel.setBorder(
+                BorderFactory.createEmptyBorder(15, 10, 15, 10)
+        );
 
-        add(titleLabel, BorderLayout.NORTH);
+        // ================= FORM TAMBAH KARAKTER =================
 
-        // FORM TAMBAH KARAKTER
         JPanel formPanel = new JPanel(new GridLayout(5, 2, 10, 10));
-
-        formPanel.setBorder(
-            BorderFactory.createTitledBorder("Tambah Karakter")
-        );
+        formPanel.setBackground(AppTheme.BG_CARD);
+        formPanel.setBorder(AppTheme.CARD_BORDER);
 
         nameField = new JTextField();
         levelField = new JTextField();
@@ -52,62 +58,85 @@ public class MainWindow extends JFrame {
 
         typeComboBox = new JComboBox<>(CharacterType.values());
 
-        formPanel.add(new JLabel("Nama:"));
+        JButton addButton = new JButton("Tambah Karakter");
+        addButton.setFont(AppTheme.FONT_BODY);
+        addButton.setToolTipText("Klik untuk menambahkan karakter baru");
+
+        formPanel.add(createLabel("Nama:"));
         formPanel.add(nameField);
 
-        formPanel.add(new JLabel("Tipe:"));
+        formPanel.add(createLabel("Tipe:"));
         formPanel.add(typeComboBox);
 
-        formPanel.add(new JLabel("Level:"));
+        formPanel.add(createLabel("Level:"));
         formPanel.add(levelField);
 
-        formPanel.add(new JLabel("Mana:"));
+        formPanel.add(createLabel("Mana:"));
         formPanel.add(manaField);
-
-        JButton addButton = new JButton("Tambah Karakter");
 
         formPanel.add(new JLabel(""));
         formPanel.add(addButton);
 
-        add(formPanel, BorderLayout.NORTH);
+        // ================= PANEL ATAS =================
 
-        // DAFTAR KARAKTER
+        JPanel topPanel = new JPanel(new BorderLayout());
+        topPanel.setBackground(AppTheme.BG_MAIN);
+
+        topPanel.add(titleLabel, BorderLayout.NORTH);
+        topPanel.add(formPanel, BorderLayout.CENTER);
+
+        add(topPanel, BorderLayout.NORTH);
+
+        // ================= DAFTAR KARAKTER =================
+
         listPanel = new JPanel();
-
         listPanel.setLayout(
-            new BoxLayout(listPanel, BoxLayout.Y_AXIS)
+                new BoxLayout(listPanel, BoxLayout.Y_AXIS)
         );
+
+        listPanel.setBackground(AppTheme.BG_MAIN);
 
         JScrollPane scrollPane = new JScrollPane(listPanel);
-
-        scrollPane.setBorder(
-            BorderFactory.createTitledBorder("Daftar Karakter")
-        );
+        scrollPane.setBorder(AppTheme.CARD_BORDER);
+        scrollPane.getViewport().setBackground(AppTheme.BG_MAIN);
 
         add(scrollPane, BorderLayout.CENTER);
 
-        // STATISTIK
-        statisticLabel = new JLabel();
+        // ================= STATISTIK =================
 
-        statisticLabel.setFont(
-            new Font("Arial", Font.BOLD, 16)
-        );
-
-        statisticLabel.setHorizontalAlignment(
-            SwingConstants.CENTER
+        statisticLabel = new JLabel("", SwingConstants.CENTER);
+        statisticLabel.setFont(AppTheme.FONT_SUBTITLE);
+        statisticLabel.setForeground(AppTheme.TEXT_LIGHT);
+        statisticLabel.setBorder(
+                BorderFactory.createEmptyBorder(12, 10, 12, 10)
         );
 
         add(statisticLabel, BorderLayout.SOUTH);
 
-        // EVENT TOMBOL
+        // ================= EVENT BUTTON =================
+
         addButton.addActionListener(e -> tambahKarakter());
 
         refreshCharacterList();
 
-        setSize(750, 600);
+        setMinimumSize(new Dimension(650, 450));
+        pack();
         setLocationRelativeTo(null);
         setVisible(true);
     }
+
+    // ================= LABEL =================
+
+    private JLabel createLabel(String text) {
+
+        JLabel label = new JLabel(text);
+        label.setFont(AppTheme.FONT_BODY);
+        label.setForeground(AppTheme.TEXT_MAIN);
+
+        return label;
+    }
+
+    // ================= TAMBAH KARAKTER =================
 
     private void tambahKarakter() {
 
@@ -115,43 +144,38 @@ public class MainWindow extends JFrame {
 
             String name = nameField.getText().trim();
 
-            CharacterType type =
-                (CharacterType) typeComboBox.getSelectedItem();
-
-            int level = Integer.parseInt(levelField.getText().trim());
-
-            int mana = Integer.parseInt(manaField.getText().trim());
-
             if (name.isEmpty()) {
                 JOptionPane.showMessageDialog(
-                    this,
-                    "Nama karakter tidak boleh kosong!"
+                        this,
+                        "Nama karakter tidak boleh kosong!"
                 );
                 return;
             }
 
+            int level = Integer.parseInt(levelField.getText().trim());
+            int mana = Integer.parseInt(manaField.getText().trim());
+
+            CharacterType type =
+                    (CharacterType) typeComboBox.getSelectedItem();
+
             if (level < 1 || mana < 0) {
                 JOptionPane.showMessageDialog(
-                    this,
-                    "Level minimal 1 dan mana tidak boleh negatif!"
+                        this,
+                        "Level minimal 1 dan mana tidak boleh negatif!"
                 );
                 return;
             }
 
             if (manager.findByName(name) != null) {
                 JOptionPane.showMessageDialog(
-                    this,
-                    "Nama karakter sudah digunakan!"
+                        this,
+                        "Nama karakter sudah digunakan!"
                 );
                 return;
             }
 
-            Character character = new Character(
-                name,
-                type,
-                level,
-                mana
-            );
+            Character character =
+                    new Character(name, type, level, mana);
 
             manager.addCharacter(character);
 
@@ -162,63 +186,105 @@ public class MainWindow extends JFrame {
             refreshCharacterList();
 
             JOptionPane.showMessageDialog(
-                this,
-                "Karakter berhasil ditambahkan!"
+                    this,
+                    "Karakter berhasil ditambahkan!"
             );
 
         } catch (NumberFormatException ex) {
 
             JOptionPane.showMessageDialog(
-                this,
-                "Level dan Mana harus berupa angka!"
+                    this,
+                    "Level dan Mana harus berupa angka!"
             );
 
         } catch (IllegalArgumentException ex) {
 
             JOptionPane.showMessageDialog(
-                this,
-                ex.getMessage()
+                    this,
+                    ex.getMessage()
             );
         }
     }
+
+    // ================= REFRESH DAFTAR =================
 
     private void refreshCharacterList() {
 
         listPanel.removeAll();
 
         ArrayList<Character> characters =
-            manager.getAllCharacters();
+                manager.getAllCharacters();
 
         for (Character character : characters) {
 
-            JLabel label = new JLabel(
-                character.getName()
-                + " | " + character.getType()
-                + " | Level: " + character.getLevel()
-                + " | HP: " + character.getHitPoints()
-                + " | Attack: " + character.getAttack()
-                + " | Mana: " + character.getMana()
+            JPanel card = new JPanel(new BorderLayout(10, 5));
+
+            // Warna kartu berdasarkan role
+            card.setBackground(
+                    AppTheme.colorFor(character.getType())
             );
 
-            label.setBorder(
-                BorderFactory.createEmptyBorder(8, 10, 8, 10)
+            // Wajib agar warna kartu terlihat
+            card.setOpaque(true);
+
+            // Border dari AppTheme
+            card.setBorder(AppTheme.CARD_BORDER);
+
+            JLabel nameLabel = new JLabel(
+                    character.getName() + " | " + character.getType()
             );
 
-            label.setFont(
-                new Font("Arial", Font.PLAIN, 14)
+            nameLabel.setFont(AppTheme.FONT_SUBTITLE);
+            nameLabel.setForeground(AppTheme.TEXT_LIGHT);
+
+            JLabel detailLabel = new JLabel(
+                    "Level: " + character.getLevel()
+                    + " | HP: " + character.getHitPoints()
+                    + " | Attack: " + character.getAttack()
+                    + " | Mana: " + character.getMana()
             );
 
-            listPanel.add(label);
+            detailLabel.setFont(AppTheme.FONT_BODY);
+            detailLabel.setForeground(AppTheme.TEXT_MAIN);
+
+            // MINI CHALLENGE:
+            // Level minimal 5 tampil emas dan tebal
+            if (character.getLevel() >= LEVEL_HIGHLIGHT) {
+
+                detailLabel.setForeground(AppTheme.GOLD);
+                detailLabel.setFont(AppTheme.FONT_LEVEL);
+            }
+
+            // Properti tambahan 1:
+            // Tooltip berisi informasi lengkap karakter
+            card.setToolTipText(
+                    "Nama: " + character.getName()
+                    + " | Role: " + character.getType()
+                    + " | Level: " + character.getLevel()
+                    + " | HP: " + character.getHitPoints()
+                    + " | Attack: " + character.getAttack()
+                    + " | Mana: " + character.getMana()
+            );
+
+            // Properti tambahan 2:
+            // Karakter level 1 dibuat tidak aktif
+            card.setEnabled(character.getLevel() != 1);
+
+            card.add(nameLabel, BorderLayout.NORTH);
+            card.add(detailLabel, BorderLayout.CENTER);
+
+            card.setMaximumSize(
+                    new Dimension(Integer.MAX_VALUE, 85)
+            );
+
+            listPanel.add(card);
+            listPanel.add(Box.createVerticalStrut(8));
         }
 
-        double average = manager.getAverageLevel();
-
         statisticLabel.setText(
-            String.format(
-                "Total Karakter: %d | Rata-rata Level: %.2f",
-                manager.getTotalCharacters(),
-                average
-            )
+                "Total Karakter: " + manager.getTotalCharacters()
+                + " | Rata-rata Level: "
+                + String.format("%.2f", manager.getAverageLevel())
         );
 
         listPanel.revalidate();
