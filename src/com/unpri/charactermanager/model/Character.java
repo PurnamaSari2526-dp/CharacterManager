@@ -1,5 +1,7 @@
 package com.unpri.charactermanager.model;
 
+import java.util.Locale;
+
 public class Character {
 
     // Atribut
@@ -104,6 +106,35 @@ public class Character {
     // Mengecek apakah karakter masih hidup
     public boolean isAlive() {
         return hitPoints > 0;
+    }
+
+    // Membandingkan karakter berdasarkan nama
+    @Override
+    public boolean equals(Object obj) {
+
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+
+        Character other = (Character) obj;
+
+        if (name == null) {
+            return other.name == null;
+        }
+
+        return name.equalsIgnoreCase(other.name);
+    }
+
+    // Menghasilkan hash code berdasarkan nama
+    @Override
+    public int hashCode() {
+        return name == null
+                ? 0
+                : name.toLowerCase(Locale.ROOT).hashCode();
     }
 
     // Menampilkan informasi karakter
