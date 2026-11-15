@@ -26,7 +26,7 @@ Berikut merupakan dokumentasi hasil pengujian program Character Manager TP3 mela
 
 ### Output Terminal
 
-![Screenshot Output TP3](Screenshot/output_tp3.png)
+![Screenshot Output TP3] ![alt text](../Screenshot/output_tp3.png)
 
 Screenshot tersebut memperlihatkan hasil program ketika dijalankan, termasuk informasi karakter, demonstrasi level up, dan hasil pengujian method `isAlive()`.
 
@@ -121,12 +121,10 @@ Program diuji melalui beberapa percobaan:
 ### Screenshot Hasil Program
 
 **1. Pengujian CRUD dan Duplikat**
-
-![Screenshot CRUD](Screenshot/output_tp5_crud.png)
+![alt text](../Screenshot/output_tp5_crud.png)
 
 **2. Pengujian Analisis Karakter**
-
-![Screenshot Analisis](Screenshot/output_tp5_analisis.png)
+![alt text](../Screenshot/output_tp5_analisis.png)
 
 ### Identitas
 - Nama: Purnama Sari
@@ -251,13 +249,13 @@ Dengan pemisahan ini, pengelolaan data dan tampilan aplikasi menjadi lebih terst
 
 Menampilkan lima karakter awal beserta statistik rata-rata level.
 
-![Screenshot Sebelum](Screenshot/tp8_sebelum.png)
+![Screenshot Sebelum]![alt text](../Screenshot/tp8_sebelum.png)
 
 ### Sesudah Menambahkan Karakter
 
 Menampilkan karakter tambahan yang dimasukkan melalui GUI serta perubahan statistik rata-rata level.
 
-![Screenshot Sesudah](Screenshot/tp8_sesudah.png)
+![Screenshot Sesudah]![alt text](../Screenshot/tp8_sesudah.png)
 
 ## 9. Dokumentasi Google Docs
 
@@ -325,14 +323,13 @@ Dengan menggunakan konstanta, batas level dapat diubah tanpa mencari angka yang 
 **Tampilan Sebelum — TP8**
 
 Simpan screenshot dengan nama:
+![alt text](<../Screenshot/tp10_sebelum - Salin.png>)
 
-![Tampilan sebelum TP10](Screenshot/tp10_sebelum - Salin.png)
 
 **Tampilan Sesudah — TP10**
 
-Simpan screenshot dengan nama:
-
-![Tampilan sesudah TP10](Screenshot/tp10_sesudah.png)
+Simpan screenshot dengan nama
+![alt text](../Screenshot/tp10_sesudah.png)
 
 ### F. Analisis MVC
 
