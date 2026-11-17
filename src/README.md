@@ -25,8 +25,8 @@ Fitur yang telah dikembangkan dalam TP3:
 Berikut merupakan dokumentasi hasil pengujian program Character Manager TP3 melalui terminal Visual Studio Code.
 
 ### Output Terminal
+![alt text](../Screenshot/output_tp3.png)
 
-![Screenshot Output TP3](Screenshot/output_tp3.png)
 
 Screenshot tersebut memperlihatkan hasil program ketika dijalankan, termasuk informasi karakter, demonstrasi level up, dan hasil pengujian method `isAlive()`.
 
