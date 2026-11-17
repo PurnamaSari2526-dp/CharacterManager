@@ -7,7 +7,7 @@ public class CharacterManager {
     // Menyimpan daftar karakter
     private ArrayList<Character> characters = new ArrayList<>();
 
-    // Menghitung total karakter yang pernah dibuat melalui manager
+    // Menghitung total karakter yang pernah dibuat
     private static int totalCharacterCreated = 0;
 
     // 1. Menambahkan karakter
@@ -18,7 +18,7 @@ public class CharacterManager {
             return;
         }
 
-        if (characters.contains(character)) {
+        if (isNameTaken(character.getName())) {
             System.out.println(
                 "Karakter duplikat ditolak: " + character.getName()
             );
@@ -33,7 +33,24 @@ public class CharacterManager {
         );
     }
 
-    // 2. Mencari karakter berdasarkan nama
+    // 2. Memeriksa apakah nama karakter sudah digunakan
+    public boolean isNameTaken(String name) {
+
+        if (name == null || name.isBlank()) {
+            return false;
+        }
+
+        for (Character character : characters) {
+
+            if (character.getName().equalsIgnoreCase(name.trim())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    // 3. Mencari karakter berdasarkan nama
     public Character findByName(String name) {
 
         if (name == null) {
@@ -41,7 +58,8 @@ public class CharacterManager {
         }
 
         for (Character character : characters) {
-            if (character.getName().equalsIgnoreCase(name)) {
+
+            if (character.getName().equalsIgnoreCase(name.trim())) {
                 return character;
             }
         }
@@ -49,7 +67,7 @@ public class CharacterManager {
         return null;
     }
 
-    // 3. Menghapus karakter berdasarkan nama
+    // 4. Menghapus karakter berdasarkan nama
     public boolean removeCharacter(String name) {
 
         Character character = findByName(name);
@@ -57,25 +75,31 @@ public class CharacterManager {
         if (character != null) {
             characters.remove(character);
 
-            System.out.println("Karakter berhasil dihapus: " + name);
+            System.out.println(
+                "Karakter berhasil dihapus: " + name
+            );
+
             return true;
         }
 
-        System.out.println("Karakter tidak ditemukan: " + name);
+        System.out.println(
+            "Karakter tidak ditemukan: " + name
+        );
+
         return false;
     }
 
-    // 4. Menghitung jumlah karakter saat ini
+    // 5. Menghitung jumlah karakter saat ini
     public int getTotalCharacters() {
         return characters.size();
     }
 
-    // 5. Mengembalikan salinan daftar karakter
+    // 6. Mengembalikan salinan daftar karakter
     public ArrayList<Character> getAllCharacters() {
         return new ArrayList<>(characters);
     }
 
-    // 6. Menghitung rata-rata level
+    // 7. Menghitung rata-rata level
     public double getAverageLevel() {
 
         if (characters.isEmpty()) {
@@ -91,7 +115,7 @@ public class CharacterManager {
         return (double) totalLevel / characters.size();
     }
 
-    // 7. Mencari karakter berdasarkan tipe
+    // 8. Mencari karakter berdasarkan tipe
     public ArrayList<Character> findByType(CharacterType type) {
 
         ArrayList<Character> result = new ArrayList<>();
@@ -101,6 +125,7 @@ public class CharacterManager {
         }
 
         for (Character character : characters) {
+
             if (character.getType() == type) {
                 result.add(character);
             }
@@ -109,12 +134,7 @@ public class CharacterManager {
         return result;
     }
 
-    /**
-     * Mencari karakter dengan nilai attack tertinggi.
-     *
-     * @return karakter dengan attack tertinggi,
-     * atau null jika daftar karakter kosong.
-     */
+    // 9. Mencari karakter dengan attack tertinggi
     public Character findStrongest() {
 
         if (characters.isEmpty()) {
@@ -124,6 +144,7 @@ public class CharacterManager {
         Character strongest = characters.get(0);
 
         for (Character character : characters) {
+
             if (character.getAttack() > strongest.getAttack()) {
                 strongest = character;
             }
@@ -132,7 +153,7 @@ public class CharacterManager {
         return strongest;
     }
 
-    // 8. Mengambil jumlah karakter yang pernah ditambahkan
+    // 10. Mengambil jumlah karakter yang pernah ditambahkan
     public static int getTotalCharacterCreated() {
         return totalCharacterCreated;
     }

@@ -12,41 +12,25 @@ public class Main {
 
         SwingUtilities.invokeLater(() -> {
 
+            // Membuat manager
             CharacterManager manager = new CharacterManager();
 
+            // Tiga karakter awal sesuai panduan dosen
             manager.addCharacter(
-                new Character("Arjun", CharacterType.WARRIOR, 8, 50)
+                new Character("Arjuna", CharacterType.WARRIOR, 5, 0)
             );
 
             manager.addCharacter(
-                new Character("Merlin", CharacterType.MAGE, 10, 150)
+                new Character("Merlin", CharacterType.MAGE, 3, 0)
             );
 
             manager.addCharacter(
-                new Character("Athena", CharacterType.ARCHER, 5, 80)
+                new Character("Athena", CharacterType.ARCHER, 4, 0)
             );
 
-            manager.addCharacter(
-                new Character("Gandalf", CharacterType.MAGE, 3, 120)
-            );
-
-            manager.addCharacter(
-                new Character("Bima", CharacterType.WARRIOR, 1, 30)
-            );
-
-            manager.addCharacter(
-                new Character("Luna", CharacterType.HEALER, 7, 100)
-            );
-
-            manager.addCharacter(
-                new Character("Raka", CharacterType.ARCHER, 4, 60)
-            );
-
-            manager.addCharacter(
-                new Character("Sinta", CharacterType.HEALER, 9, 130)
-            );
-
+            // Menampilkan aplikasi
             new MainWindow(manager);
+
         });
     }
 }
