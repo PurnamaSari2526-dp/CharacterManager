@@ -3,19 +3,23 @@ package com.unpri.charactermanager.view;
 import com.unpri.charactermanager.model.Character;
 import com.unpri.charactermanager.model.CharacterManager;
 import com.unpri.charactermanager.model.CharacterType;
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
+import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.border.EmptyBorder;
 
 public class MainWindow extends JFrame {
@@ -31,6 +35,12 @@ public class MainWindow extends JFrame {
     private JLabel averageLabel;
     private JLabel warriorLabel;
     private JLabel mageLabel;
+
+    // Komponen form tambah karakter
+    private JTextField nameField;
+    private JComboBox<CharacterType> typeCombo;
+    private JSpinner levelSpinner;
+    private JSpinner manaSpinner;
 
     public MainWindow(CharacterManager manager) {
 
@@ -52,7 +62,7 @@ public class MainWindow extends JFrame {
 
         refreshCharacters();
 
-        setMinimumSize(new Dimension(650, 400));
+        setMinimumSize(new Dimension(750, 500));
 
         pack();
         setLocationRelativeTo(null);
@@ -60,7 +70,7 @@ public class MainWindow extends JFrame {
     }
 
     // =====================================
-    // HEADER DAN PANEL STATISTIK
+    // HEADER, STATISTIK DAN FORM TAMBAH
     // =====================================
 
     private JPanel createHeader() {
@@ -79,7 +89,7 @@ public class MainWindow extends JFrame {
 
         header.add(title, BorderLayout.NORTH);
 
-        // Panel statistik tambahan GridLayout 2x2
+        // Panel statistik GridLayout 2x2
         JPanel statistics = new JPanel(
             new GridLayout(2, 2, 10, 5)
         );
@@ -98,7 +108,84 @@ public class MainWindow extends JFrame {
 
         header.add(statistics, BorderLayout.CENTER);
 
+        // Form tambah karakter
+        JPanel formPanel = new JPanel(
+            new GridLayout(2, 5, 6, 5)
+        );
+
+        formPanel.setBackground(AppTheme.BG_CARD);
+
+        formPanel.setBorder(
+            new EmptyBorder(8, 8, 8, 8)
+        );
+
+        // Input nama
+        JLabel nameText = createFormLabel("Nama:");
+        nameField = new JTextField(10);
+
+        // Pilihan role
+        JLabel typeText = createFormLabel("Role:");
+        typeCombo = new JComboBox<>(CharacterType.values());
+
+        // Input level
+        JLabel levelText = createFormLabel("Level:");
+        levelSpinner = new JSpinner(
+            new SpinnerNumberModel(1, 1, 100, 1)
+        );
+
+        // Input mana
+        JLabel manaText = createFormLabel("Mana:");
+        manaSpinner = new JSpinner(
+            new SpinnerNumberModel(0, 0, 1000, 10)
+        );
+
+        // Tombol tambah
+        JButton addButton = new JButton("Tambah Karakter");
+
+        addButton.setBackground(AppTheme.GOLD);
+        addButton.setForeground(AppTheme.BG_MAIN);
+        addButton.setFocusPainted(false);
+
+        // Baris pertama
+        formPanel.add(nameText);
+        formPanel.add(nameField);
+        formPanel.add(typeText);
+        formPanel.add(typeCombo);
+        formPanel.add(addButton);
+
+        // Baris kedua
+        formPanel.add(levelText);
+        formPanel.add(levelSpinner);
+        formPanel.add(manaText);
+        formPanel.add(manaSpinner);
+        formPanel.add(new JLabel(""));
+
+        // Aksi tombol
+        addButton.addActionListener(e -> tambahKarakter());
+
+        header.add(formPanel, BorderLayout.SOUTH);
+
         return header;
+    }
+
+    private JLabel createStatLabel(String text) {
+
+        JLabel label = new JLabel(text);
+
+        label.setForeground(AppTheme.TEXT_MAIN);
+        label.setFont(AppTheme.FONT_BODY);
+
+        return label;
+    }
+
+    private JLabel createFormLabel(String text) {
+
+        JLabel label = new JLabel(text);
+
+        label.setForeground(AppTheme.TEXT_MAIN);
+        label.setFont(AppTheme.FONT_BODY);
+
+        return label;
     }
 
     // =====================================
@@ -119,15 +206,12 @@ public class MainWindow extends JFrame {
             new EmptyBorder(10, 10, 10, 10)
         );
 
-        // Panel pembungkus
         JPanel wrapper = new JPanel(new BorderLayout());
 
         wrapper.setBackground(AppTheme.BG_MAIN);
 
-        // Daftar karakter berada di NORTH
         wrapper.add(characterPanel, BorderLayout.NORTH);
 
-        // ScrollPane membungkus panel wrapper
         JScrollPane scroll = new JScrollPane(wrapper);
 
         scroll.setPreferredSize(
@@ -178,7 +262,6 @@ public class MainWindow extends JFrame {
 
         legend.add(Box.createVerticalStrut(20));
 
-        // Mengambil seluruh role dari enum
         for (CharacterType type : CharacterType.values()) {
 
             JPanel item = new JPanel(
@@ -210,9 +293,7 @@ public class MainWindow extends JFrame {
 
             legend.add(item);
 
-            legend.add(
-                Box.createVerticalStrut(10)
-            );
+            legend.add(Box.createVerticalStrut(10));
         }
 
         legend.add(Box.createVerticalGlue());
@@ -248,37 +329,95 @@ public class MainWindow extends JFrame {
         versionLabel.setForeground(AppTheme.GOLD);
         versionLabel.setFont(AppTheme.FONT_SUBTITLE);
 
-        // Status kiri
-        statusBar.add(
-            statusLabel,
-            BorderLayout.WEST
-        );
-
-        // Versi kanan
-        statusBar.add(
-            versionLabel,
-            BorderLayout.EAST
-        );
+        statusBar.add(statusLabel, BorderLayout.WEST);
+        statusBar.add(versionLabel, BorderLayout.EAST);
 
         return statusBar;
     }
 
     // =====================================
-    // LABEL STATISTIK
+    // FUNGSI TAMBAH KARAKTER
     // =====================================
 
-    private JLabel createStatLabel(String text) {
+    private void tambahKarakter() {
 
-        JLabel label = new JLabel(text);
+        String nama = nameField.getText().trim();
 
-        label.setForeground(AppTheme.TEXT_MAIN);
-        label.setFont(AppTheme.FONT_BODY);
+        CharacterType tipe =
+            (CharacterType) typeCombo.getSelectedItem();
 
-        return label;
+        int level = (Integer) levelSpinner.getValue();
+
+        int mana = (Integer) manaSpinner.getValue();
+
+        // Validasi nama kosong
+        if (nama.isEmpty()) {
+
+            JOptionPane.showMessageDialog(
+                this,
+                "Nama karakter tidak boleh kosong!",
+                "Peringatan",
+                JOptionPane.WARNING_MESSAGE
+            );
+
+            nameField.requestFocus();
+            return;
+        }
+
+        // Validasi nama duplikat
+        if (manager.findByName(nama) != null) {
+
+            JOptionPane.showMessageDialog(
+                this,
+                "Karakter dengan nama tersebut sudah ada!",
+                "Karakter Duplikat",
+                JOptionPane.WARNING_MESSAGE
+            );
+
+            nameField.requestFocus();
+            return;
+        }
+
+        try {
+
+            Character karakterBaru = new Character(
+                nama,
+                tipe,
+                level,
+                mana
+            );
+
+            manager.addCharacter(karakterBaru);
+
+            // Kosongkan form setelah berhasil
+            nameField.setText("");
+            typeCombo.setSelectedIndex(0);
+            levelSpinner.setValue(1);
+            manaSpinner.setValue(0);
+
+            // Perbarui daftar dan statistik
+            refreshCharacters();
+
+            JOptionPane.showMessageDialog(
+                this,
+                "Karakter berhasil ditambahkan!",
+                "Berhasil",
+                JOptionPane.INFORMATION_MESSAGE
+            );
+
+        } catch (IllegalArgumentException e) {
+
+            JOptionPane.showMessageDialog(
+                this,
+                e.getMessage(),
+                "Kesalahan",
+                JOptionPane.ERROR_MESSAGE
+            );
+        }
     }
 
     // =====================================
-    // MENAMPILKAN KARTU KARAKTER
+    // MEMPERBARUI KARTU DAN STATISTIK
     // =====================================
 
     private void refreshCharacters() {
@@ -305,7 +444,6 @@ public class MainWindow extends JFrame {
                 new Dimension(Integer.MAX_VALUE, 85)
             );
 
-            // Nama karakter
             JLabel name = new JLabel(
                 character.getName()
             );
@@ -313,7 +451,6 @@ public class MainWindow extends JFrame {
             name.setForeground(AppTheme.TEXT_LIGHT);
             name.setFont(AppTheme.FONT_SUBTITLE);
 
-            // Informasi karakter
             JLabel details = new JLabel(
                 "Role: " + character.getType()
                 + " | Level: " + character.getLevel()
@@ -324,7 +461,6 @@ public class MainWindow extends JFrame {
             details.setForeground(AppTheme.TEXT_MAIN);
             details.setFont(AppTheme.FONT_BODY);
 
-            // Level 5 ke atas menggunakan warna emas
             if (character.getLevel() >= 5) {
 
                 details.setForeground(AppTheme.GOLD);
@@ -340,7 +476,6 @@ public class MainWindow extends JFrame {
                 Box.createVerticalStrut(10)
             );
 
-            // Menghitung jumlah role
             if (character.getType() == CharacterType.WARRIOR) {
                 warrior++;
             }
@@ -373,7 +508,6 @@ public class MainWindow extends JFrame {
             "Menampilkan " + total + " karakter"
         );
 
-        // Memperbarui tampilan Swing
         characterPanel.revalidate();
         characterPanel.repaint();
     }
